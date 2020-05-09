@@ -1,5 +1,5 @@
-# mytoobox
+# mytoolbox
 Repository for custom scripts
 
-* Install CrowdStrike
-* Get Local Accounts && Most Recent Activity Date
+* [a]Install CrowdStrike
+* [b]Get Local Accounts && Most Recent Activity Date
