@@ -1,4 +1,4 @@
-# mytoolbox
+# myPYtoolbox
 Repository for custom scripts
 
 * [Install CrowdStrike](#a)
