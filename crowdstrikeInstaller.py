@@ -35,12 +35,10 @@ def getOperatingSystem_ID():
     result = pipe1.stdout.splitlines()
     for i in result:
         if re.match(r'ID=', i):
-            name = i
-        elif re.match(r'VERSION=',i):
-            version_id = i
+            id = i
         else:
             continue
-    return name
+    return id
 #Definition for getting OS VERSION
 def getOperatingSystem_VERSION():
     try:
@@ -54,19 +52,19 @@ def getOperatingSystem_VERSION():
     result = pipe1.stdout.splitlines()
     for i in result:
         if re.match(r'VERSION=',i):
-            version_id = i
+            version = i
         else:
             continue
-    return version_id
+    return version
 
-def executeCommands(name,version_id):
-    if ("centos" in name) and ("7" in version_id):
+def executeCommands(id,version):
+    if ("centos" in id) and ("7" in version):
         runCentOS7()
-    elif ("centos" in name) and ("8" in version_id):
+    elif ("centos" in id) and ("8" in version):
         runCentOS8()
-    elif ("ubuntu" in name) and ("18.04" in version_id):
+    elif ("ubuntu" in id) and ("18.04" in version):
         runUbuntu18_04()
-    elif ("ubuntu" in name) and ("20.04" in version_id):
+    elif ("ubuntu" in id) and ("20.04" in version):
         runUbuntu20_04()
     else:
         print("Failed to detect Operating System")
@@ -85,7 +83,7 @@ def runUbuntu20_04():
 
 #####START SCRIPT#####
 getRootUser()
-name = getOperatingSystem_ID()
-version_id = getOperatingSystem_VERSION()
-executeCommands(name,version_id)
+id = getOperatingSystem_ID()
+version = getOperatingSystem_VERSION()
+executeCommands(id,version)
 #####END SCRIPT#####
