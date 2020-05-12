@@ -120,7 +120,7 @@ def runCentOS8():
     
     try:
         result = subprocess.run(
-        ["/usr/bin/dnf"," install"," -y"," /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm"],
+        ['/usr/bin/dnf install -y /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm'],
         check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
