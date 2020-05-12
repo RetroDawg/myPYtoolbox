@@ -2,7 +2,6 @@
 # Goal: This script will install the crowdstike package
 
 # Import Libraries
-#from subprocess import Popen, PIPE
 import subprocess
 from subprocess import Popen, PIPE
 from glob import glob
@@ -10,6 +9,9 @@ from shlex import split
 import sys
 import os
 import re
+
+# "MY" Customer ID
+var_CID = '941077C3CE5C44C4BDF4EB3D3C1CE22F-AE'
 
 #Definition for checking Root User
 def getRootUser():
@@ -20,7 +22,6 @@ def getRootUser():
     else:
         print ("PLEASE RUN SCRIPT WITH SUDO PRIVILEDGES")
         sys.exit()
-
 
 #Definition for getting OS ID
 def getOperatingSystem_ID():
@@ -39,6 +40,7 @@ def getOperatingSystem_ID():
         else:
             continue
     return id
+
 #Definition for getting OS VERSION
 def getOperatingSystem_VERSION():
     try:
@@ -65,21 +67,157 @@ def executeCommands(id,version):
     elif ("ubuntu" in id) and ("18.04" in version):
         runUbuntu18_04()
     elif ("ubuntu" in id) and ("20.04" in version):
-        runUbuntu20_04()
+        runUbuntu20_04() 
     else:
         print("Failed to detect Operating System")
 
 def runCentOS7():
     print("Detected CentOS7 running runCentOS7()")
+    try:
+        result = subprocess.run(
+        ["yum"] + ["install"] + ["-y"] + ["falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        
+        result = subprocess.run(
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
 
+        result = subprocess.run(
+        ["service "] + ["falcon-sensor "] + ["start"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+
+        pipe1 = subprocess.run(
+        ["ps "] + ["-e "] + ["start"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        result = pipe1.stdout.splitlines()
+        for i in result:
+            if re.match(r'falcon-sensor',i):
+                break
+            else:
+                print("Sensor not runnning, exiting")
+                quit()
+    except subprocess.TimeoutExpired as err:
+        result = err
+        print(result)
+        
 def runCentOS8():
     print("Detected CentOS8 running runCentOS8()")
+    try:
+        result = subprocess.run(
+        ["yum"] + ["install"] + ["-y"] + ["falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        
+        result = subprocess.run(
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+
+        result = subprocess.run(
+        ["systemctl "] + ["start "] + ["falcon-sensor"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+
+        pipe1 = subprocess.run(
+        ["ps "] + ["-e "] + ["start"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        result = pipe1.stdout.splitlines()
+        for i in result:
+            if re.match(r'falcon-sensor',i):
+                break
+            else:
+                print("Sensor not runnning, exiting")
+                quit()
+    except subprocess.TimeoutExpired as err:
+        result = err
+        print(result)
 
 def runUbuntu18_04():
     print("Detected Ubuntu 18.04 running runUbuntu18_04()")
+    try:
+        result = subprocess.run(
+        ["dpkg"] + ["-i"] + ["-y"] + ["falcon-sensor_5.31.0-9606_amd64.deb"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        
+        result = subprocess.run(
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+
+        result = subprocess.run(
+        ["service "] + ["falcon-sensor "] + ["start"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+
+        pipe1 = subprocess.run(
+        ["ps "] + ["-e "] + ["start"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        result = pipe1.stdout.splitlines()
+        for i in result:
+            if re.match(r'falcon-sensor',i):
+                break
+            else:
+                print("Sensor not runnning, exiting")
+                quit()
+    except subprocess.TimeoutExpired as err:
+        result = err
+        print(result)
 
 def runUbuntu20_04():
     print("Detected Ubuntu 20.04 running runUbuntu20_04()")
+    try:
+        result = subprocess.run(
+        ["dpkg"] + ["-i"] + ["-y"] + ["falcon-sensor_5.31.0-9606_amd64.deb"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        
+        result = subprocess.run(
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+
+        result = subprocess.run(
+        ["service "] + ["falcon-sensor "] + ["start"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+
+        pipe1 = subprocess.run(
+        ["ps "] + ["-e "] + ["start"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+        result = pipe1.stdout.splitlines()
+        for i in result:
+            if re.match(r'falcon-sensor',i):
+                break
+            else:
+                print("Sensor not runnning, exiting")
+                quit()
+    except subprocess.TimeoutExpired as err:
+        result = err
+        print(result)
 
 #####START SCRIPT#####
 getRootUser()
