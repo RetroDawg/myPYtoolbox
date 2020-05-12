@@ -122,7 +122,7 @@ def runCentOS8():
         ["/usr/bin/dnf"," install"," -y"," /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        universal_newlines=True)
+        universal_newlines=True,shell=True)
 
         #result = subprocess.run(
         #["/opt/CrowdStrike/falconctl ","-s "," --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
