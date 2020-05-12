@@ -6,6 +6,7 @@ import subprocess
 from subprocess import Popen, PIPE
 from glob import glob
 from shlex import split
+import urllib.request
 import sys
 import os
 import re
@@ -66,14 +67,17 @@ def executeCommands(id,version):
         runCentOS8()
     elif ("ubuntu" in id) and ("18.04" in version):
         runUbuntu18_04()
-    elif ("ubuntu" in id) and ("20.04" in version):
-        runUbuntu20_04() 
+    #elif ("ubuntu" in id) and ("20.04" in version):
+    #    runUbuntu20_04() 
     else:
         print("Failed to detect Operating System")
 
 def runCentOS7():
     print("Detected CentOS7 running runCentOS7()")
+    url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/CentOS7/falcon-sensor-5.31.0-9606.el7.x86_64.rpm'
+    urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el7.x86_64.rpm')
     try:
+
         result = subprocess.run(
         ["yum"] + ["install"] + ["-y"] + ["falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
         stdout=subprocess.PIPE,
@@ -107,9 +111,11 @@ def runCentOS7():
     except subprocess.TimeoutExpired as err:
         result = err
         print(result)
-        
+
 def runCentOS8():
     print("Detected CentOS8 running runCentOS8()")
+    url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/CentOS8/falcon-sensor-5.31.0-9606.el8.x86_64.rpm'
+    urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
     try:
         result = subprocess.run(
         ["yum"] + ["install"] + ["-y"] + ["falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
@@ -147,6 +153,8 @@ def runCentOS8():
 
 def runUbuntu18_04():
     print("Detected Ubuntu 18.04 running runUbuntu18_04()")
+    url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/Ubuntu14-16-18/falcon-sensor_5.31.0-9606_amd64.deb'
+    urllib.request.urlretrieve(url, '/tmp/falcon-sensor_5.31.0-9606_amd64.deb')
     try:
         result = subprocess.run(
         ["dpkg"] + ["-i"] + ["-y"] + ["falcon-sensor_5.31.0-9606_amd64.deb"],
@@ -184,6 +192,7 @@ def runUbuntu18_04():
 
 def runUbuntu20_04():
     print("Detected Ubuntu 20.04 running runUbuntu20_04()")
+    url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/Ubuntu14-16-18/falcon-sensor_5.31.0-9606_amd64.deb'
     try:
         result = subprocess.run(
         ["dpkg"] + ["-i"] + ["-y"] + ["falcon-sensor_5.31.0-9606_amd64.deb"],
