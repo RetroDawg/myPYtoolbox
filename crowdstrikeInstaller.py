@@ -125,7 +125,8 @@ def runCentOS8():
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
-        
+        a = result.stdout.splitlines()
+        print(a)
         #result = subprocess.run(
         #["/opt/CrowdStrike/falconctl ","-s "," --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
         #capture_output=True,
