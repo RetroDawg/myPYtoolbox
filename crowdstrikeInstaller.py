@@ -79,7 +79,7 @@ def runCentOS7():
     try:
 
         result = subprocess.run(
-        ["/usr/bin/yum"] + [" install"] + [" -y"] + [" falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
+        ["/usr/bin/yum"," install"," -y"," falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
