@@ -125,34 +125,34 @@ def runCentOS8():
         stderr=subprocess.PIPE,
         universal_newlines=True)
 
-        result = subprocess.run(
-        ["/opt/CrowdStrike/falconctl ","-s "," --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
-        capture_output=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
+        #result = subprocess.run(
+        #["/opt/CrowdStrike/falconctl ","-s "," --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
+        #capture_output=True,
+        #stdout=subprocess.PIPE,
+        #stderr=subprocess.PIPE,
+        #universal_newlines=True)
 
-        result = subprocess.run(
-        ["/bin/systemctl ","start "," falcon-sensor"],
-        capture_output=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
+        #result = subprocess.run(
+        #["/bin/systemctl ","start "," falcon-sensor"],
+        #capture_output=True,
+        #stdout=subprocess.PIPE,
+        #stderr=subprocess.PIPE,
+        #universal_newlines=True)
 
-        pipe1 = subprocess.run(
-        ["/bin/ps ","-e "],
-        capture_output=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
-        result = pipe1.stdout.splitlines()
-        for i in result:
-            if re.match(r'falcon-sensor',i):
-                print("Falcon Strike Service is now running, please check console to verify.")
-                break
-            else:
-                print("Sensor not runnning, exiting")
-                quit()
+        #pipe1 = subprocess.run(
+        #["/bin/ps ","-e "],
+        #capture_output=True,
+        #stdout=subprocess.PIPE,
+        #stderr=subprocess.PIPE,
+        #universal_newlines=True)
+        #result = pipe1.stdout.splitlines()
+        #for i in result:
+        #    if re.match(r'falcon-sensor',i):
+        #        print("Falcon Strike Service is now running, please check console to verify.")
+        #        break
+        #    else:
+        #        print("Sensor not runnning, exiting")
+        #        quit()
     except subprocess.TimeoutExpired as err:
         result = err
         print(result)
