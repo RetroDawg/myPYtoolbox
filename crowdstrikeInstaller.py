@@ -1,3 +1,5 @@
+[root@asset tmp]$ vim crowdstrikeInstaller.py
+[root@asset tmp]$ vim crowdstrikeInstaller.py
 # Developer: Jose Arrisola Jr.
 # Goal: This script will install the crowdstike package
 
@@ -68,7 +70,7 @@ def executeCommands(id,version):
     elif ("ubuntu" in id) and ("18.04" in version):
         runUbuntu18_04()
     #elif ("ubuntu" in id) and ("20.04" in version):
-    #    runUbuntu20_04() 
+    #    runUbuntu20_04()
     else:
         print("Failed to detect Operating System")
 
@@ -83,9 +85,9 @@ def runCentOS7():
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
-        
+
         result = subprocess.run(
-        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -122,7 +124,7 @@ def runCentOS8():
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
-        
+
         result = subprocess.run(
         ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
         stdout=subprocess.PIPE,
@@ -161,7 +163,7 @@ def runUbuntu18_04():
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
-        
+
         result = subprocess.run(
         ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
         stdout=subprocess.PIPE,
@@ -199,7 +201,7 @@ def runUbuntu20_04():
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
-        
+
         result = subprocess.run(
         ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
         stdout=subprocess.PIPE,
