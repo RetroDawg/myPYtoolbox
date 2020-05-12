@@ -104,6 +104,7 @@ def runCentOS7():
         result = pipe1.stdout.splitlines()
         for i in result:
             if re.match(r'falcon-sensor',i):
+                print("Falcon Strike Service is now running, please check console to verify.")
                 break
             else:
                 print("Sensor not runnning, exiting")
@@ -143,6 +144,7 @@ def runCentOS8():
         result = pipe1.stdout.splitlines()
         for i in result:
             if re.match(r'falcon-sensor',i):
+                print("Falcon Strike Service is now running, please check console to verify.")
                 break
             else:
                 print("Sensor not runnning, exiting")
@@ -182,6 +184,7 @@ def runUbuntu18_04():
         result = pipe1.stdout.splitlines()
         for i in result:
             if re.match(r'falcon-sensor',i):
+                print("Falcon Strike Service is now running, please check console to verify.")
                 break
             else:
                 print("Sensor not runnning, exiting")
@@ -220,6 +223,7 @@ def runUbuntu20_04():
         result = pipe1.stdout.splitlines()
         for i in result:
             if re.match(r'falcon-sensor',i):
+                print("Falcon Strike Service is now running, please check console to verify.")
                 break
             else:
                 print("Sensor not runnning, exiting")
