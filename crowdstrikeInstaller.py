@@ -1,5 +1,3 @@
-[root@asset tmp]$ vim crowdstrikeInstaller.py
-[root@asset tmp]$ vim crowdstrikeInstaller.py
 # Developer: Jose Arrisola Jr.
 # Goal: This script will install the crowdstike package
 
