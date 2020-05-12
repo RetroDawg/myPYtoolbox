@@ -77,27 +77,17 @@ def runCentOS7():
     url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/CentOS7/falcon-sensor-5.31.0-9606.el7.x86_64.rpm'
     urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el7.x86_64.rpm')
     try:
+        stream = os.popen('/usr/bin/yum install -y /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
+        output = stream.read()
+        
+        stream = os.popen('/opt/CrowdStrike/falconctl -s --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE')
+        output = stream.read()
 
-        result = subprocess.run(
-        ["/usr/bin/yum"," install"," -y"," falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
-
-        result = subprocess.run(
-        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
-
-        result = subprocess.run(
-        ["/usr/sbin/service "] + ["falcon-sensor "] + ["start"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
+        stream = os.popen('/usr/sbin/service falcon-sensor start')
+        output = stream.read()
 
         pipe1 = subprocess.run(
-        ["/usr/bin/ps "] + ["-e "] + ["start"],
+        ["/usr/bin/ps ","-e "],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -119,45 +109,30 @@ def runCentOS8():
     urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
     
     try:
-        result = subprocess.run(
-        ['/usr/bin/dnf install -y /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm'],
-        check=True,
+        stream = os.popen('/usr/bin/dnf install -y /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
+        output = stream.read()
+        
+        stream = os.popen('/opt/CrowdStrike/falconctl -s --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE')
+        output = stream.read()
+
+        stream = os.popen('/bin/systemctl start falcon-sensor')
+        output = stream.read()
+
+        pipe1 = subprocess.run(
+        ["/bin/ps ","-e "],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
-        a = result.stdout.splitlines()
-        print(a)
-        #result = subprocess.run(
-        #["/opt/CrowdStrike/falconctl ","-s "," --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
-        #capture_output=True,
-        #stdout=subprocess.PIPE,
-        #stderr=subprocess.PIPE,
-        #universal_newlines=True)
-
-        #result = subprocess.run(
-        #["/bin/systemctl ","start "," falcon-sensor"],
-        #capture_output=True,
-        #stdout=subprocess.PIPE,
-        #stderr=subprocess.PIPE,
-        #universal_newlines=True)
-
-        #pipe1 = subprocess.run(
-        #["/bin/ps ","-e "],
-        #capture_output=True,
-        #stdout=subprocess.PIPE,
-        #stderr=subprocess.PIPE,
-        #universal_newlines=True)
-        #result = pipe1.stdout.splitlines()
-        #for i in result:
-        #    if re.match(r'falcon-sensor',i):
-        #        print("Falcon Strike Service is now running, please check console to verify.")
-        #        break
-        #    else:
-        #        print("Sensor not runnning, exiting")
-        #        quit()
+        result = pipe1.stdout.splitlines()
+        for i in result:
+            if re.match(r'falcon-sensor',i):
+                print("Falcon Strike Service is now running, please check console to verify.")
+                break
+            else:
+                print("Sensor not runnning, exiting")
+                quit()
     except subprocess.TimeoutExpired as err:
         result = err
-        print(result)
 
 def runUbuntu18_04():
     print("Detected Ubuntu 18.04 running runUbuntu18_04()")
