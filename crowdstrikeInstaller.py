@@ -119,7 +119,7 @@ def runCentOS8():
     urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
     try:
         result = subprocess.run(
-        ["yum "] + ["install "] + [" -y"] + [" falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
+        ["dnf "] + ["install "] + [" -y"] + [" falcon-sensor-5.31.0-9606.el8.x86_64.rpm"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
