@@ -125,19 +125,19 @@ def runCentOS8():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["/opt/CrowdStrike/falconctl "] + ["-s "] + [" --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
+        ["/opt/CrowdStrike/falconctl ","-s "," --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
 
         result = subprocess.run(
-        ["/bin/systemctl "] + ["start "] + [" falcon-sensor"],
+        ["/bin/systemctl ","start "," falcon-sensor"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
 
         pipe1 = subprocess.run(
-        ["/bin/ps "] + ["-e "] + ["start"],
+        ["/bin/ps ","-e "],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
