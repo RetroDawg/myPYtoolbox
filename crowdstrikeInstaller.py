@@ -126,7 +126,7 @@ def runCentOS8():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -165,7 +165,7 @@ def runUbuntu18_04():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -203,7 +203,7 @@ def runUbuntu20_04():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid="var_CID],
+        ["/opt/CrowdStrike/falconctl "] + ["-s "] + ["--cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
