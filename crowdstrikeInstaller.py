@@ -21,21 +21,9 @@ def getRootUser():
         print ("PLEASE RUN SCRIPT WITH SUDO PRIVILEDGES")
         sys.exit()
 
-def runCentOS7():
-    print("In runCentOS7()")
 
-def runCentOS8():
-    print("In runCentOS8()")
-
-def runUbuntu18_04():
-    print("In runUbuntu18_04()")
-
-def runUbuntu20_04():
-    print("In runUbuntu20_04()")
-
-#Definition for getting OS release
-def getOperatingSystem():
-    #pipe1 = subprocess.Popen(split("/usr/bin/cat /etc/*-release"), stdout=PIPE) 
+#Definition for getting OS ID
+def getOperatingSystem_ID():
     try:
         pipe1 = subprocess.run(
         ["cat"] + glob("/etc/*-release"),
@@ -47,13 +35,31 @@ def getOperatingSystem():
     result = pipe1.stdout.splitlines()
     for i in result:
         if re.match(r'ID=', i):
-            print(i)
             name = i
         elif re.match(r'VERSION=',i):
-            print(i)
             version_id = i
         else:
             continue
+    return name
+#Definition for getting OS VERSION
+def getOperatingSystem_VERSION():
+    try:
+        pipe1 = subprocess.run(
+        ["cat"] + glob("/etc/*-release"),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True)
+    except subprocess.TimeoutExpired as err:
+        pipe1 = err
+    result = pipe1.stdout.splitlines()
+    for i in result:
+        if re.match(r'VERSION=',i):
+            version_id = i
+        else:
+            continue
+    return version_id
+
+def executeCommands(name,version_id):
     if ("centos" in name) and ("7" in version_id):
         runCentOS7()
     elif ("centos" in name) and ("8" in version_id):
@@ -65,7 +71,21 @@ def getOperatingSystem():
     else:
         print("Failed to detect Operating System")
 
+def runCentOS7():
+    print("Detected CentOS7 running runCentOS7()")
+
+def runCentOS8():
+    print("Detected CentOS8 running runCentOS8()")
+
+def runUbuntu18_04():
+    print("Detected Ubuntu 18.04 running runUbuntu18_04()")
+
+def runUbuntu20_04():
+    print("Detected Ubuntu 20.04 running runUbuntu20_04()")
+
 #####START SCRIPT#####
 getRootUser()
-getOperatingSystem()
+name = getOperatingSystem_ID()
+version_id = getOperatingSystem_VERSION()
+executeCommands(name,version_id)
 #####END SCRIPT#####
