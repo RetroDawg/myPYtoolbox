@@ -136,22 +136,15 @@ def runUbuntu18_04():
         stream = os.popen('/usr/sbin/service  falcon-sensor start')
         output = stream.read()
 
-        pipe1 = subprocess.run(
-        ["/bin/ps "] + ["-e "] + ["start"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
-        result = pipe1.stdout.splitlines()
-        for i in result:
-            if re.match(r'falcon-sensor',i):
-                print("Falcon Strike Service is now running, please check console to verify.")
-                break
-            else:
-                print("Sensor not runnning, exiting")
-                quit()
+        stream = os.popen('/bin/ps -e')
+        output = stream.read()
+        if "falcon-sensor" in output:
+            print("Falcon Strike Service is now running, please check console to verify.")
+        else:
+            print("Sensor not runnning, exiting")
+            quit()
     except subprocess.TimeoutExpired as err:
         result = err
-        print(result)
 
 def runUbuntu20_04():
     print("Detected Ubuntu 20.04 running runUbuntu20_04()")
@@ -166,23 +159,13 @@ def runUbuntu20_04():
         stream = os.popen('/usr/sbin/service  falcon-sensor start')
         output = stream.read()
         
-        pipe1 = subprocess.run(
-        ["/usr/bin/ps "] + ["-e "] + ["start"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        universal_newlines=True)
-        result = pipe1.stdout.splitlines()
-        for i in result:
-            if re.match(r'falcon-sensor',i):
-                print("Falcon Strike Service is now running, please check console to verify.")
-                break
-            else:
-                print("Sensor not runnning, exiting")
-                quit()
-    except subprocess.TimeoutExpired as err:
-        result = err
-        print(result)
-
+        stream = os.popen('/usr/bin/ps -e')
+        output = stream.read()
+        if "falcon-sensor" in output:
+            print("Falcon Strike Service is now running, please check console to verify.")
+        else:
+            print("Sensor not runnning, exiting")
+            quit()
 #####START SCRIPT#####
 getRootUser()
 id = getOperatingSystem_ID()
