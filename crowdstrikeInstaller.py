@@ -79,7 +79,7 @@ def runCentOS7():
     try:
 
         result = subprocess.run(
-        ["yum"] + [" install"] + [" -y"] + [" falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
+        ["/usr/bin/yum"] + [" install"] + [" -y"] + [" falcon-sensor-5.31.0-9606.el7.x86_64.rpm"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -91,13 +91,13 @@ def runCentOS7():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["service "] + ["falcon-sensor "] + ["start"],
+        ["/usr/sbin/service "] + ["falcon-sensor "] + ["start"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
 
         pipe1 = subprocess.run(
-        ["ps "] + ["-e "] + ["start"],
+        ["/usr/bin/ps "] + ["-e "] + ["start"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -119,7 +119,7 @@ def runCentOS8():
     urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
     try:
         result = subprocess.run(
-        ["dnf "] + ["install "] + [" -y"] + [" falcon-sensor-5.31.0-9606.el8.x86_64.rpm"],
+        ["/bin/dnf "] + ["install "] + [" -y"] + [" falcon-sensor-5.31.0-9606.el8.x86_64.rpm"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -131,13 +131,13 @@ def runCentOS8():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["systemctl "] + ["start "] + [" falcon-sensor"],
+        ["/bin/systemctl "] + ["start "] + [" falcon-sensor"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
 
         pipe1 = subprocess.run(
-        ["ps "] + ["-e "] + ["start"],
+        ["/bin/ps "] + ["-e "] + ["start"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -159,7 +159,7 @@ def runUbuntu18_04():
     urllib.request.urlretrieve(url, '/tmp/falcon-sensor_5.31.0-9606_amd64.deb')
     try:
         result = subprocess.run(
-        ["dpkg "] + ["-i "] + ["-y "] + [" falcon-sensor_5.31.0-9606_amd64.deb"],
+        ["/usr/bin/dpkg "] + ["-i "] + ["-y "] + [" falcon-sensor_5.31.0-9606_amd64.deb"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -171,13 +171,13 @@ def runUbuntu18_04():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["service "] + ["falcon-sensor "] + ["start"],
+        ["/usr/sbin/service "] + ["falcon-sensor "] + ["start"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
 
         pipe1 = subprocess.run(
-        ["ps "] + ["-e "] + ["start"],
+        ["/bin/ps "] + ["-e "] + ["start"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -198,7 +198,7 @@ def runUbuntu20_04():
     url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/Ubuntu14-16-18/falcon-sensor_5.31.0-9606_amd64.deb'
     try:
         result = subprocess.run(
-        ["dpkg "] + ["-i "] + ["-y "] + [" falcon-sensor_5.31.0-9606_amd64.deb"],
+        ["/usr/bin/dpkg "] + ["-i "] + ["-y "] + [" falcon-sensor_5.31.0-9606_amd64.deb"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
@@ -210,13 +210,13 @@ def runUbuntu20_04():
         universal_newlines=True)
 
         result = subprocess.run(
-        ["service "] + ["falcon-sensor "] + ["start"],
+        ["/usr/sbin/service "] + ["falcon-sensor "] + ["start"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
 
         pipe1 = subprocess.run(
-        ["ps "] + ["-e "] + ["start"],
+        ["/usr/bin/ps "] + ["-e "] + ["start"],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
