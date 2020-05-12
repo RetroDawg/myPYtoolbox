@@ -117,19 +117,15 @@ def runCentOS8():
     print("Detected CentOS8 running runCentOS8()")
     url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/CentOS8/falcon-sensor-5.31.0-9606.el8.x86_64.rpm'
     urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
-    result = subprocess.run(
+    
+    try:
+        result = subprocess.run(
         ["/usr/bin/dnf"," install"," -y"," /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm"],
+        check=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         universal_newlines=True)
-
-    try:
-        #result = subprocess.run(
-        #["/usr/bin/dnf"," install"," -y"," /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm"],
-        #stdout=subprocess.PIPE,
-        #stderr=subprocess.PIPE,
-        #universal_newlines=True,shell=True)
-
+        
         #result = subprocess.run(
         #["/opt/CrowdStrike/falconctl ","-s "," --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE"],
         #capture_output=True,
