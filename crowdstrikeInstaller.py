@@ -149,6 +149,7 @@ def runUbuntu18_04():
 def runUbuntu20_04():
     print("Detected Ubuntu 20.04 running runUbuntu20_04()")
     url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/Ubuntu14-16-18/falcon-sensor_5.31.0-9606_amd64.deb'
+    urllib.request.urlretrieve(url, '/tmp/falcon-sensor_5.31.0-9606_amd64.deb')
     try:
         stream = os.popen('apt-get -f -y install /tmp/falcon-sensor_5.31.0-9606_amd64.deb')
         output = stream.read()
