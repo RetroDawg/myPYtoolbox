@@ -166,6 +166,9 @@ def runUbuntu20_04():
         else:
             print("Sensor not runnning, exiting")
             quit()
+    except subprocess.TimeoutExpired as err:
+        result = err
+
 #####START SCRIPT#####
 getRootUser()
 id = getOperatingSystem_ID()
