@@ -86,7 +86,7 @@ def runCentOS7():
         stream = os.popen('/usr/sbin/service falcon-sensor start')
         output = stream.read()
 
-       stream = os.popen('/usr/bin/ps -e')
+        stream = os.popen('/usr/bin/ps -e')
         output = stream.read()
         if "falcon-sensor" in output:
             print("Falcon Strike Service is now running, please check console to verify.")
