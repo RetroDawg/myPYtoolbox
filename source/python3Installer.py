@@ -34,7 +34,6 @@ def getOperatingSystem_ID():
 #Definition for getting OS VERSION
 def getOperatingSystem_VERSION():
     try:
-        try:
         stream = os.popen('cat /etc/*-release | grep -w "VERSION="')
         version = stream.read()
     except subprocess.TimeoutExpired as err:
