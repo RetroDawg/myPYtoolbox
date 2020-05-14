@@ -7,6 +7,7 @@ from subprocess import Popen, PIPE
 from glob import glob
 from shlex import split
 import urllib
+import urllib.request
 import sys
 import os
 import re
