@@ -29,7 +29,7 @@ def getOperatingSystem_ID():
     except subprocess.TimeoutExpired as err:
         stream = err
         print(stream)
-    return output
+    return id
 
 #Definition for getting OS VERSION
 def getOperatingSystem_VERSION():
