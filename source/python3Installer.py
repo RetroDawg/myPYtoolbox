@@ -6,7 +6,6 @@ import subprocess
 from subprocess import Popen, PIPE
 from glob import glob
 from shlex import split
-import urllib
 import sys
 import os
 import re
@@ -43,18 +42,18 @@ def getOperatingSystem_VERSION():
 
 def executeCommands(id,version):
     if ("centos" in id) and ("7" in version):
-        runCentOS7()
+        runCentOS7python3Installer()
     elif ("centos" in id) and ("8" in version):
-        runCentOS8()
+        runCentOS8python3Installer()
     elif ("ubuntu" in id) and ("18.04" in version):
-        runUbuntu18_04()
+        runUbuntu18_04python3Installer()
     elif ("ubuntu" in id) and ("20.04" in version):
-        runUbuntu20_04()
+        runUbuntu20_04python3Installer()
     else:
         print("Failed to detect Operating System")
 
-def runCentOS7():
-    print("Detected CentOS7 running runCentOS7()")
+def runCentOS7python3Installer():
+    print("Detected CentOS7 running runCentOS7python3Installer")
     try:
         stream = os.popen('/usr/bin/yum install -y python3')
         output = stream.read()
@@ -63,8 +62,8 @@ def runCentOS7():
         stream = err
         print(stream)
 
-def runCentOS8():
-    print("Detected CentOS8 running runCentOS8()")
+def runCentOS8python3Installer():
+    print("Detected CentOS8 running runCentOS8python3Installer")
     try:
         stream = os.popen('/usr/bin/dnf install -y python3')
         output = stream.read()        
@@ -73,8 +72,8 @@ def runCentOS8():
         stream = err
         print(stream)
 
-def runUbuntu18_04():
-    print("Detected Ubuntu 18.04 running runUbuntu18_04()")
+def runUbuntu18_04python3Installer():
+    print("Detected Ubuntu 18.04 running runUbuntu18_04python3Installer()")
     try:
         stream = os.popen('apt-get -f -y install python3')
         output = stream.read()
@@ -83,8 +82,8 @@ def runUbuntu18_04():
         stream = err
         print(stream)
 
-def runUbuntu20_04():
-    print("Detected Ubuntu 20.04 running runUbuntu20_04()")
+def runUbuntu20_04python3Installer():
+    print("Detected Ubuntu 20.04 running runUbuntu20_04python3Installer()")
     try:
         stream = os.popen('apt-get -f -y install python3')
         output = stream.read()
