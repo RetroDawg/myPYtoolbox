@@ -6,7 +6,7 @@ import subprocess
 from subprocess import Popen, PIPE
 from glob import glob
 from shlex import split
-import urllib.request
+import urllib
 import sys
 import os
 import re
@@ -77,7 +77,7 @@ def runCentOS7():
     url = 'https://repo.geos.tamu.edu/common-configs/toolbox/source/sensor-download/CentOS7/falcon-sensor-5.31.0-9606.el7.x86_64.rpm'
     urllib.request.urlretrieve(url, '/tmp/falcon-sensor-5.31.0-9606.el7.x86_64.rpm')
     try:
-        stream = os.popen('/usr/bin/yum install -y /tmp/falcon-sensor-5.31.0-9606.el8.x86_64.rpm')
+        stream = os.popen('/usr/bin/yum install -y /tmp/falcon-sensor-5.31.0-9606.el7.x86_64.rpm')
         output = stream.read()
         
         stream = os.popen('/opt/CrowdStrike/falconctl -s --cid=941077C3CE5C44C4BDF4EB3D3C1CE22F-AE')
